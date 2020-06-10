@@ -57,19 +57,32 @@ class BumbleBot():#Setting a main class item
         Number_Of_Likes_count = 0        
 
         while True:#starts a while loop
-            When_to_disike = random.randint(0,10)# sets a new var as a random number  
-            time.sleep(2)#wait
-            self.like()#call like method
-            Number_Of_Likes_count += 1#increment how many users we are liked
-            if When_to_disike >= 6:#if statement to reset the loop and add one dislike so that tinder does not think this is a bot. 
-               self.dislike()#calls dislike
-               Number_of_Dislikes =+ 1#increment how many users we are disliked
-            if Number_Of_Likes_count == 2:#Caps the whole loop at 2 likes, tweak as you need 
-               print("End of Max loop count")
-               time.sleep(1)
-               self.driver.close()#close the open broswer window 
-               break
-        print("Liked: ",Number_Of_Likes_count,"And dislikes: ",Number_of_Dislikes)#Prints out the vars we started to increment so that you who what has happened 
+            try:
+               #Here we add a bit of randonness to the code to help get around bot detection 
+               x = random.randint(0,50)
+               When_to_disike = random.randint(0,10)# sets a new var as a random number  
+               time.sleep(2)#wait
+               
+               self.like()#call like method
+               Number_Of_Likes_count += 1#increment how many users we are liked
+               if When_to_disike >= x:#if statement to reset the loop and add one dislike so that tinder does not think this is a bot. 
+                  self.dislike()#calls dislike
+                  Number_of_Dislikes =+ 1#increment how many users we are disliked
+               if Number_Of_Likes_count == 30:#Caps the whole loop at 2 likes, tweak as you need 
+                  print("End of Max loop count")
+                  time.sleep(1)
+                  self.driver.close()#close the open broswer window 
+                  break
+                  exit()#break the loop and end the code  
+                
+               print("Liked: ",Number_Of_Likes_count,"And dislikes: ",Number_of_Dislikes)#Prints out the vars we started to increment so that you who what has happened   
+                 
+            except Exception:
+                print("We have come across an error or have max number of likes mathued")
+                exit()
+
+                
+        
         
 
 
